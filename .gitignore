@@ -1,0 +1,10 @@
+.gradle/
+.idea/
+build/
+node_modules/
+.tmp/
+dist/
+TravelBuddy.iml
+out
+target
+HELP.md
