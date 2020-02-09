@@ -1,24 +1,32 @@
 <nav>
   <h1>Travel Buddy</h1>
 
-  <button class="btn btn-outline-primary" (click)="showModal = true">
+  <button class="btn btn-outline-primary" (click)="isLoggedIn ? logout() : showModal = true">
     <clr-icon shape="user"></clr-icon>
-    Log in
+    {{ isLoggedIn ? 'Log out' : 'Log in' }}
   </button>
 
   <clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="false">
     <h3 class="modal-title">
-      Log in
+      {{ registerModal ? 'Register' : 'Log in' }}
     </h3>
     <div class="modal-body">
-      <form [formGroup]="loginForm" autocomplete="off">
+      <form [formGroup]="loginForm" autocomplete="off" *ngIf="!registerModal">
         <input clrInput type="text" formControlName="username" placeholder="Username">
         <input clrInput type="password" formControlName="password" placeholder="Password">
       </form>
+      <form [formGroup]="registerForm" autocomplete="off" *ngIf="registerModal">
+        <input clrInput type="text" formControlName="username" placeholder="Username">
+        <input clrInput type="email" formControlName="email" placeholder="E-mail">
+        <input clrInput type="password" formControlName="password" placeholder="Password">
+        <input clrInput type="text" formControlName="firstName" placeholder="First name">
+        <input clrInput type="text" formControlName="lastName" placeholder="Last name">
+        <input clrInput type="text" formControlName="phoneNumber" placeholder="Phone">
+      </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline" (click)="showModal = false">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="login()">Log in</button>
+      <button type="button" class="btn btn-outline" (click)="registerModal = !registerModal">{{ registerModal ? 'Log in' : 'Register' }}</button>
+      <button type="button" class="btn btn-primary" (click)="registerModal ? register() : login()">{{ registerModal ? 'Register' : 'Log in' }}</button>
     </div>
   </clr-modal>
 

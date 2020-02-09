@@ -19,4 +19,10 @@ export class AuthService {
     });
   }
 
+  register(params: any) {
+    return this.http.post<string>(`${environment.backendUrl}/register`, params).subscribe( () => {
+      console.log("User registered");
+    })
+  }
+
 }

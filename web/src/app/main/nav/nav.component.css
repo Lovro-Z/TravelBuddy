@@ -16,7 +16,9 @@ button {
 }
 
 .modal-body {
+  overflow: hidden;
   min-height: 150px;
+  max-height: none;
   display: flex;
   justify-content: center;
 }
