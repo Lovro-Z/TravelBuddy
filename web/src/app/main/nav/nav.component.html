@@ -1,0 +1,25 @@
+<nav>
+  <h1>Travel Buddy</h1>
+
+  <button class="btn btn-outline-primary" (click)="showModal = true">
+    <clr-icon shape="user"></clr-icon>
+    Log in
+  </button>
+
+  <clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="false">
+    <h3 class="modal-title">
+      Log in
+    </h3>
+    <div class="modal-body">
+      <form [formGroup]="loginForm" autocomplete="off">
+        <input clrInput type="text" formControlName="username" placeholder="Username">
+        <input clrInput type="password" formControlName="password" placeholder="Password">
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="showModal = false">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="login()">Log in</button>
+    </div>
+  </clr-modal>
+
+</nav>

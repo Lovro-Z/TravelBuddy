@@ -3,6 +3,7 @@ package zubcic.travel.travelapplication.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zubcic.travel.travelapplication.dto.CreateUserDto;
+import zubcic.travel.travelapplication.dto.LoginDto;
 import zubcic.travel.travelapplication.model.User;
 import zubcic.travel.travelapplication.services.UserService;
 
@@ -20,8 +21,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
-        String token = userService.login(username, password);
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+        String token = userService.login(loginDto.getUsername(), loginDto.getPassword());
         return ResponseEntity.ok(token);
     }
 
