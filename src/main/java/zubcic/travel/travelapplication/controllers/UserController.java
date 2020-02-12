@@ -21,13 +21,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
         String token = userService.login(loginDto.getUsername(), loginDto.getPassword());
         return ResponseEntity.ok(token);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody CreateUserDto userDto) throws URISyntaxException {
+    public ResponseEntity<User> register(@RequestBody CreateUserDto userDto) throws URISyntaxException {
         User user = userService.register(userDto);
         return ResponseEntity.created(new URI(user.getId().toString())).body(user);
     }

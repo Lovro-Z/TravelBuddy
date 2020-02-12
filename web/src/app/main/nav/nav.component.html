@@ -1,7 +1,8 @@
 <nav>
+
   <h1>Travel Buddy</h1>
 
-  <button class="btn btn-outline-primary" (click)="isLoggedIn ? logout() : showModal = true">
+  <button class="btn btn-outline-primary" (click)="isLoggedIn ? logout() : loginModal()">
     <clr-icon shape="user"></clr-icon>
     {{ isLoggedIn ? 'Log out' : 'Log in' }}
   </button>
@@ -14,20 +15,51 @@
       <form [formGroup]="loginForm" autocomplete="off" *ngIf="!registerModal">
         <input clrInput type="text" formControlName="username" placeholder="Username">
         <input clrInput type="password" formControlName="password" placeholder="Password">
+        <clr-alert [clrAlertType]="'danger'" [(clrAlertClosed)]="closeAlert">
+          <clr-alert-item>
+        <span class="alert-text">
+            Invalid username/password!
+        </span>
+          </clr-alert-item>
+        </clr-alert>
       </form>
       <form [formGroup]="registerForm" autocomplete="off" *ngIf="registerModal">
-        <input clrInput type="text" formControlName="username" placeholder="Username">
-        <input clrInput type="email" formControlName="email" placeholder="E-mail">
-        <input clrInput type="password" formControlName="password" placeholder="Password">
-        <input clrInput type="text" formControlName="firstName" placeholder="First name">
-        <input clrInput type="text" formControlName="lastName" placeholder="Last name">
-        <input clrInput type="text" formControlName="phoneNumber" placeholder="Phone">
+        <clr-input-container>
+          <input clrInput type="text" formControlName="username" placeholder="Username" required="required">
+          <clr-control-error>Username required!</clr-control-error>
+        </clr-input-container>
+        <clr-input-container>
+          <input clrInput type="email" formControlName="email" placeholder="E-mail">
+          <clr-control-error>Invalid e-mail!</clr-control-error>
+        </clr-input-container>
+        <clr-input-container>
+          <input clrInput type="password" formControlName="password" placeholder="Password">
+          <clr-control-error>Password required!</clr-control-error>
+        </clr-input-container>
+        <clr-input-container>
+          <input clrInput type="text" formControlName="firstName" placeholder="First name">
+          <clr-control-error>First name required!</clr-control-error>
+        </clr-input-container>
+        <clr-input-container>
+          <input clrInput type="text" formControlName="lastName" placeholder="Last name">
+          <clr-control-error>Last name required!</clr-control-error>
+        </clr-input-container>
+        <clr-input-container>
+          <input clrInput type="text" formControlName="phoneNumber" placeholder="Phone">
+          <clr-control-error>Phone number required!</clr-control-error>
+        </clr-input-container>
+        <clr-alert [clrAlertType]="'danger'" [(clrAlertClosed)]="closeAlert">
+          <clr-alert-item>
+        <span class="alert-text">
+            Please fill in the required fields.
+        </span>
+          </clr-alert-item>
+        </clr-alert>
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline" (click)="registerModal = !registerModal">{{ registerModal ? 'Log in' : 'Register' }}</button>
-      <button type="button" class="btn btn-primary" (click)="registerModal ? register() : login()">{{ registerModal ? 'Register' : 'Log in' }}</button>
+      <button type="button" class="btn btn-outline" (click)="switchModal()">{{ registerModal ? 'Log in' : 'Register' }}</button>
+      <button type="submit" class="btn btn-primary" (click)="registerModal ? register() : login()">{{ registerModal ? 'Register' : 'Log in' }}</button>
     </div>
   </clr-modal>
-
 </nav>
