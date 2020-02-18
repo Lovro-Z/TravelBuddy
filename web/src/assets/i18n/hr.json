@@ -1,0 +1,32 @@
+{
+  "login": {
+    "login": "Prijava",
+    "logout": "Odjava",
+    "username": "Korisničko ime",
+    "password": "Lozinka"
+  },
+
+  "register": {
+    "register": "Registracija",
+    "username": "Korisničko ime",
+    "email": "E-mail",
+    "password": "Lozinka",
+    "first-name": "Ime",
+    "last-name": "Prezime",
+    "phone-number": "Broj mobitela"
+  },
+
+  "validation": {
+    "username": "Korisničko ime je obavezno!",
+    "email": "Neispravan e-mail!",
+    "password": "Lozinka je obavezna!",
+    "first-name": "Ime je obavezno!",
+    "last-name": "Prezime je obavezno!",
+    "phone": "Broj mobitela je obavezan!"
+  },
+
+  "error": {
+    "invalid-user": "Neispravno korisničko ime ili lozinka",
+    "existing-user": "Korisnikčko ime zauzeto"
+  }
+}

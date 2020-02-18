@@ -1,0 +1,32 @@
+{
+  "login": {
+    "login": "Log in",
+    "logout": "Log out",
+    "username": "Username",
+    "password": "Password"
+  },
+
+  "register": {
+    "register": "Register",
+    "username": "Username",
+    "email": "E-mail",
+    "password": "Password",
+    "first-name": "First name",
+    "last-name": "Last name",
+    "phone-number": "Phone number"
+  },
+
+  "validation": {
+    "username": "Username required!",
+    "email": "Invalid e-mail!",
+    "password": "Password required!",
+    "first-name": "First name required!",
+    "last-name": "Last name required!",
+    "phone": "Phone number required!"
+  },
+
+  "error": {
+    "invalid-user": "Invalid username/password",
+    "existing-user": "Username already exists"
+  }
+}

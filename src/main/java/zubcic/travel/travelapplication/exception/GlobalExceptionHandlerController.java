@@ -1,21 +1,21 @@
 package zubcic.travel.travelapplication.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import javax.servlet.http.HttpServletResponse;
 
 @RestControllerAdvice
-public class GlobalExceptionHandlerController extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandlerController {
 
     @ExceptionHandler(InvalidUserException.class)
-    public void handleInvalidUserException(HttpServletResponse res, InvalidUserException ex) throws Exception {
-        res.sendError(ex.getHttpStatus().value(), ex.getMessage());
+    public ResponseEntity<String> handleInvalidUserException() {
+        return new ResponseEntity<>("invalid-user", HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
+
     @ExceptionHandler(ExistingUsernameException.class)
-    public void handleExistingUsernameException(HttpServletResponse res, ExistingUsernameException ex) throws Exception {
-        res.sendError(ex.getHttpStatus().value(), ex.getMessage());
+    public ResponseEntity<String> handleExistingUsernameException() {
+        return new ResponseEntity<>("existing-user", HttpStatus.CONFLICT);
     }
 }

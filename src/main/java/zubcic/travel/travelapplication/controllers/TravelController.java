@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import zubcic.travel.travelapplication.dto.CreateTravelDto;
+import zubcic.travel.travelapplication.dto.TravelItemDto;
 import zubcic.travel.travelapplication.mapper.TravelMapper;
 import zubcic.travel.travelapplication.model.Travel;
 import zubcic.travel.travelapplication.services.TravelService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/travels")
@@ -27,10 +26,7 @@ public class TravelController {
 
 
     @GetMapping
-    public ResponseEntity<List<Travel>> getAllTravels() {
-        List<Travel> travelList = travelService.findAllTravels();
-        List<CreateTravelDto> travelDtoList = travelList.stream().map(travelMapper::toDto).collect(Collectors.toList());
-        travelDtoList.forEach(t -> System.out.println(t.toString()));
+    public ResponseEntity<List<TravelItemDto>> getAllTravels() {
         return ResponseEntity.ok(travelService.findAllTravels());
     }
 

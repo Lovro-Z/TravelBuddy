@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../core/auth.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-nav',
@@ -13,6 +14,7 @@ export class NavComponent implements OnInit {
   isLoggedIn: boolean = false;
   registerModal: boolean = false;
   closeAlert: boolean = true;
+  errorMessage: string;
 
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -28,40 +30,42 @@ export class NavComponent implements OnInit {
     phoneNumber: new FormControl('', Validators.required),
   });
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private translate: TranslateService) { }
+
+  ngOnInit() {
+    this.auth.registerSuccess$.subscribe(() => {
+      this.registerModal = false;
+      this.registerForm.reset();
+    });
+
+    this.auth.errorMessage$.subscribe(value => {
+      if (value) {
+        this.errorMessage = value;
+        this.closeAlert = false;
+      }
+    });
+
+    this.auth.loggedIn$.subscribe(param => {
+      if(param){
+        this.isLoggedIn = true;
+        this.showModal = false;
+      }
+    });
+  }
 
   login() {
-    if(this.loginForm.valid) {
-      this.auth.login(this.loginForm.value);
-      this.loginForm.reset();
-    } else {
-      this.showAlert();
-      console.log('Invalid username/password');
-    }
+    this.auth.login(this.loginForm.value);
+    this.loginForm.reset();
   }
 
   register() {
-    if(this.registerForm.valid) {
-      this.auth.register(this.registerForm.value);
-      this.registerModal = false;
-      this.registerForm.reset();
-    } else {
-      this.showAlert();
-      console.log('Invalid form');
-    }
+    this.auth.register(this.registerForm.value);
   }
 
   switchModal():boolean {
     this.registerModal = !this.registerModal;
     this.closeAlert = true;
     return this.registerModal;
-  }
-
-  showAlert() {
-    this.closeAlert = false;
-    setTimeout(() => {
-      this.closeAlert = true;
-    }, 3000);
   }
 
   logout() {
@@ -74,12 +78,7 @@ export class NavComponent implements OnInit {
     this.registerModal = false;
   }
 
-  ngOnInit() {
-    this.auth.isLoggedIn().subscribe(param => {
-      if(param){
-        this.isLoggedIn = true;
-        this.showModal = false;
-      }
-    });
+  useLanguage(language: string) {
+    this.translate.use(language);
   }
 }

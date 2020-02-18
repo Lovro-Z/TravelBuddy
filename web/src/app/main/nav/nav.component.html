@@ -4,62 +4,66 @@
 
   <button class="btn btn-outline-primary" (click)="isLoggedIn ? logout() : loginModal()">
     <clr-icon shape="user"></clr-icon>
-    {{ isLoggedIn ? 'Log out' : 'Log in' }}
+    {{ isLoggedIn ? ('login.logout' | translate) : ('login.login' | translate) }}
   </button>
+
+  <button class="btn btn-outline-primary languageButton" (click)="useLanguage('en')">English</button>
+  <button class="btn btn-outline-primary languageButton" (click)="useLanguage('hr')">Croatian</button>
 
   <clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="false">
     <h3 class="modal-title">
-      {{ registerModal ? 'Register' : 'Log in' }}
+      {{ registerModal ? ('register.register' | translate) : ('login.login' | translate) }}
     </h3>
     <div class="modal-body">
       <form [formGroup]="loginForm" autocomplete="off" *ngIf="!registerModal">
-        <input clrInput type="text" formControlName="username" placeholder="Username">
-        <input clrInput type="password" formControlName="password" placeholder="Password">
+        <input clrInput type="text" formControlName="username" placeholder="{{ 'login.username' | translate }}">
+        <input clrInput type="password" formControlName="password" placeholder="{{ 'login.password' | translate }}">
         <clr-alert [clrAlertType]="'danger'" [(clrAlertClosed)]="closeAlert">
           <clr-alert-item>
-        <span class="alert-text">
-            Invalid username/password!
-        </span>
+            <span class="alert-text">
+                {{ 'error.' + errorMessage | translate }}
+            </span>
           </clr-alert-item>
         </clr-alert>
       </form>
       <form [formGroup]="registerForm" autocomplete="off" *ngIf="registerModal">
         <clr-input-container>
-          <input clrInput type="text" formControlName="username" placeholder="Username" required="required">
-          <clr-control-error>Username required!</clr-control-error>
+          <input clrInput type="text" formControlName="username" placeholder="{{ 'register.username' | translate }}" required="required">
+          <clr-control-error>{{ 'validation.username' | translate }}</clr-control-error>
         </clr-input-container>
         <clr-input-container>
-          <input clrInput type="email" formControlName="email" placeholder="E-mail">
-          <clr-control-error>Invalid e-mail!</clr-control-error>
+          <input clrInput type="email" formControlName="email" placeholder="{{ 'register.email' | translate }}">
+          <clr-control-error>{{ 'validation.email' | translate }}</clr-control-error>
         </clr-input-container>
         <clr-input-container>
-          <input clrInput type="password" formControlName="password" placeholder="Password">
-          <clr-control-error>Password required!</clr-control-error>
+          <input clrInput type="password" formControlName="password" placeholder="{{ 'register.password' | translate }}">
+          <clr-control-error>{{ 'validation.password' | translate }}</clr-control-error>
         </clr-input-container>
         <clr-input-container>
-          <input clrInput type="text" formControlName="firstName" placeholder="First name">
-          <clr-control-error>First name required!</clr-control-error>
+          <input clrInput type="text" formControlName="firstName" placeholder="{{ 'register.first-name' | translate }}">
+          <clr-control-error>{{ 'validation.first-name' | translate }}</clr-control-error>
         </clr-input-container>
         <clr-input-container>
-          <input clrInput type="text" formControlName="lastName" placeholder="Last name">
-          <clr-control-error>Last name required!</clr-control-error>
+          <input clrInput type="text" formControlName="lastName" placeholder="{{ 'register.last-name' | translate }}">
+          <clr-control-error>{{ 'validation.last-name' | translate }}</clr-control-error>
         </clr-input-container>
         <clr-input-container>
-          <input clrInput type="text" formControlName="phoneNumber" placeholder="Phone">
-          <clr-control-error>Phone number required!</clr-control-error>
+          <input clrInput type="text" formControlName="phoneNumber" placeholder="{{ 'register.phone-number' | translate }}">
+          <clr-control-error>{{ 'validation.phone' | translate }}</clr-control-error>
         </clr-input-container>
         <clr-alert [clrAlertType]="'danger'" [(clrAlertClosed)]="closeAlert">
           <clr-alert-item>
-        <span class="alert-text">
-            Please fill in the required fields.
-        </span>
+            <span class="alert-text">
+                {{ 'error.' + errorMessage | translate }}
+            </span>
           </clr-alert-item>
         </clr-alert>
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline" (click)="switchModal()">{{ registerModal ? 'Log in' : 'Register' }}</button>
-      <button type="submit" class="btn btn-primary" (click)="registerModal ? register() : login()">{{ registerModal ? 'Register' : 'Log in' }}</button>
+      <button type="button" class="btn btn-outline" (click)="switchModal()">{{ registerModal ? ('login.login' | translate) : ('register.register' | translate) }}</button>
+      <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary" (click)="login()" *ngIf="!registerModal">{{ 'login.login' | translate }}</button>
+      <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary" (click)="register()" *ngIf="registerModal">{{ 'register.register' | translate }}</button>
     </div>
   </clr-modal>
 </nav>
