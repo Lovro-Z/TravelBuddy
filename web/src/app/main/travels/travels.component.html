@@ -1,3 +1,5 @@
-<ul *ngFor="let travel of travels">
-  <li>{{ travel.title }}</li>
-</ul>
+<div class="main-container">
+  <app-travel-item *ngFor="let travel of travels" [travel]="travel">
+  </app-travel-item>
+</div>
+

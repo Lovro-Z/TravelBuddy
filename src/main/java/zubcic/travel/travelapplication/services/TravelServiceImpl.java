@@ -22,11 +22,14 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public Travel findTravelById(Long id) {
-        return travelRepository.findById(id).get();
+        return travelRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<TravelItemDto> findAllTravels() {
-        return travelRepository.findAll().stream().map(travelMapper::entityToDto).collect(Collectors.toList());
+        return travelRepository.findAll()
+                .stream()
+                .map(travelMapper::entityToDto)
+                .collect(Collectors.toList());
     }
 }

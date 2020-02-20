@@ -11,12 +11,14 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { TravelsComponent } from './main/travels/travels.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { TravelItemComponent } from './main/travel-item/travel-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    TravelsComponent
+    TravelsComponent,
+    TravelItemComponent
   ],
   imports: [
     BrowserModule,

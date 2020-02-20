@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
             user = userRepository.save(user);
             return user;
         } else {
-            throw new ExistingUsernameException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+            throw new ExistingUsernameException("Username is already in use");
         }
     }
 }

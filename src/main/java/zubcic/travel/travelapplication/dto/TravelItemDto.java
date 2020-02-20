@@ -9,6 +9,7 @@ public class TravelItemDto {
     private Integer duration;
     private LocalDate date;
     private BigDecimal price;
+    private String description;
 
     public String getTitle() {
         return title;
@@ -42,6 +43,14 @@ public class TravelItemDto {
         this.price = price;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "TravelItemDto{" +
@@ -49,6 +58,7 @@ public class TravelItemDto {
                 ", duration=" + duration +
                 ", date=" + date +
                 ", price=" + price +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

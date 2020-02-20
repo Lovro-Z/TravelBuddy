@@ -1,12 +1,12 @@
 package zubcic.travel.travelapplication.exception;
 
-public class ExistingUsernameException extends RuntimeException {
+public class NotFoundException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
 
     private final String message;
 
-    public ExistingUsernameException(String message) {
+    public NotFoundException(String message) {
         this.message = message;
     }
 

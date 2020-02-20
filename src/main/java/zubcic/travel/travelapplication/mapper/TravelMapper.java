@@ -13,6 +13,7 @@ public class TravelMapper {
         travel.setDuration(travelItemDto.getDuration());
         travel.setDate(travelItemDto.getDate());
         travel.setPrice(travelItemDto.getPrice());
+        travel.setDescription(travelItemDto.getDescription());
         return travel;
     }
 
@@ -22,6 +23,7 @@ public class TravelMapper {
         travelDto.setDuration(travel.getDuration());
         travelDto.setDate(travel.getDate());
         travelDto.setPrice(travel.getPrice());
+        travelDto.setDescription(travel.getDescription());
         return travelDto;
     }
 }

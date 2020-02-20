@@ -12,7 +12,7 @@ h1 {
 
 button {
   float: right;
-  margin: 2%;
+  margin: 20px 10px;
 }
 
 .modal-body {
@@ -29,7 +29,7 @@ button {
 }
 
 .languageButton {
-  margin: 10px;
+  margin: 20px 10px;
 }
 
 

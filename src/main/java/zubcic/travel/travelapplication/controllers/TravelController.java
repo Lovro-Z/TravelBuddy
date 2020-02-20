@@ -17,13 +17,10 @@ import java.util.List;
 public class TravelController {
 
     private final TravelService travelService;
-    private final TravelMapper travelMapper;
 
-    public TravelController(TravelService travelService, TravelMapper travelMapper) {
+    public TravelController(TravelService travelService) {
         this.travelService = travelService;
-        this.travelMapper = travelMapper;
     }
-
 
     @GetMapping
     public ResponseEntity<List<TravelItemDto>> getAllTravels() {
