@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Creating a new travel</h1>
+  <form [formGroup]="travelForm" autocomplete="off">
+    <clr-input-container>
+      <input clrInput type="text" formControlName="title" placeholder="Title" required="required">
+      <clr-control-error>Title is required!</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <input clrInput type="date" formControlName="date" placeholder="Date" required="required">
+      <clr-control-error>Date is required!</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <input clrInput type="text" formControlName="duration" placeholder="Duration" required="required">
+      <clr-control-error>Duration is required!</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <input clrInput type="text" formControlName="price" placeholder="Price">
+      <clr-control-error>Price is required!</clr-control-error>
+    </clr-input-container>
+    <clr-textarea-container>
+      <textarea clrTextarea formControlName="description" placeholder="Description"></textarea>
+    </clr-textarea-container>
+  </form>
+  <button [disabled]="travelForm.invalid" type="submit" class="btn btn-primary" (click)="createTravel()">{{ 'Create' }}</button>
+</div>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../core/auth.service";
+import {AuthService} from "../../core/user/auth.service";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -11,10 +11,11 @@ import {TranslateService} from "@ngx-translate/core";
 export class NavComponent implements OnInit {
 
   showModal: boolean = false;
-  isLoggedIn: boolean = false;
   registerModal: boolean = false;
   closeAlert: boolean = true;
   errorMessage: string;
+  currentLang: string = 'en';
+  currentUser: any;
 
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -32,34 +33,37 @@ export class NavComponent implements OnInit {
 
   constructor(private auth: AuthService, private translate: TranslateService) { }
 
+  get isAdmin() {
+    return this.currentUser.auth === 'ADMIN';
+  }
+
   ngOnInit() {
-    this.auth.registerSuccess$.subscribe(() => {
-      this.registerModal = false;
-      this.registerForm.reset();
-    });
-
-    this.auth.errorMessage$.subscribe(value => {
-      if (value) {
-        this.errorMessage = value;
-        this.closeAlert = false;
-      }
-    });
-
-    this.auth.loggedIn$.subscribe(param => {
-      if(param){
-        this.isLoggedIn = true;
+    this.auth.currentUser$.subscribe( user => {
+      this.currentUser = user;
+      if(user) {
         this.showModal = false;
       }
-    });
+    })
   }
 
   login() {
-    this.auth.login(this.loginForm.value);
+    this.auth.login(this.loginForm.value).subscribe(
+      () => {},
+      error => {
+        this.errorMessage = error.error;
+        this.closeAlert = false;
+      });
     this.loginForm.reset();
   }
 
   register() {
-    this.auth.register(this.registerForm.value);
+    this.auth.register(this.registerForm.value).subscribe(() => {
+      this.registerModal = false;
+      this.registerForm.reset();
+    }, error => {
+      this.errorMessage = error.error;
+      this.closeAlert = false;
+    });
   }
 
   switchModal():boolean {
@@ -70,7 +74,8 @@ export class NavComponent implements OnInit {
 
   logout() {
     localStorage.clear();
-    this.isLoggedIn = false;
+    this.closeAlert = true;
+    this.currentUser = null;
   }
 
   loginModal() {
@@ -80,5 +85,10 @@ export class NavComponent implements OnInit {
 
   useLanguage(language: string) {
     this.translate.use(language);
+    this.currentLang = language;
+  }
+
+  isCurrentLang(language: string) {
+    return this.currentLang === language;
   }
 }

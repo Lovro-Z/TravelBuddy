@@ -1,14 +1,32 @@
 <nav>
 
-  <h1>Travel Buddy</h1>
+  <div class="clr-row clr-justify-content-between title">
+    <div class="clr-col-3">
+      <a routerLink=""><h1>Travel Buddy</h1></a>
+    </div>
 
-  <button class="btn btn-outline-primary" (click)="isLoggedIn ? logout() : loginModal()">
-    <clr-icon shape="user"></clr-icon>
-    {{ isLoggedIn ? ('login.logout' | translate) : ('login.login' | translate) }}
-  </button>
-
-  <button class="btn btn-outline-primary languageButton" (click)="useLanguage('en')">English</button>
-  <button class="btn btn-outline-primary languageButton" (click)="useLanguage('hr')">Croatian</button>
+    <div class="clr-col-4 clr-justify-content-end action-btns">
+      <button class="btn btn-sm languageButton" [class.btn-link]="!isCurrentLang('en')" (click)="useLanguage('en')">English</button>
+      <button class="btn btn-sm languageButton" [class.btn-link]="!isCurrentLang('hr')" (click)="useLanguage('hr')">Hrvatski</button>
+      <button class="btn btn-outline-primary login-btn" (click)="currentUser ? logout() : loginModal()" *ngIf="!currentUser">
+        <clr-icon shape="user"></clr-icon>
+        {{ 'login.login' | translate }}
+      </button>
+      <clr-dropdown *ngIf="currentUser">
+        <button clrDropdownTrigger class="btn btn-outline-primary dropdown-btn">
+          <clr-icon shape="user"></clr-icon>
+          {{ currentUser.sub }}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-right">
+          <button class="dropdown-item btn btn-outline-primary" *ngIf="isAdmin" routerLink="new-travel"><clr-icon shape="ruler-pencil"></clr-icon> {{ 'login.edit-travels' | translate }}</button>
+          <button class="dropdown-item btn btn-outline-primary" *ngIf="!isAdmin"><clr-icon shape="map"></clr-icon> {{ 'login.my-travels' | translate }}</button>
+          <button class="dropdown-item btn btn-outline-primary"><clr-icon shape="cog"></clr-icon> {{ 'login.settings' | translate }}</button>
+          <button class="dropdown-item btn btn-outline-primary" (click)="logout()"><clr-icon shape="logout"></clr-icon> {{ 'login.logout' | translate }}</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </div>
 
   <clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="false">
     <h3 class="modal-title">

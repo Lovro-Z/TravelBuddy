@@ -8,17 +8,19 @@ import {ClarityModule} from '@clr/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import { TravelsComponent } from './main/travels/travels.component';
+import {TravelsComponent} from './main/travels/travels.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import { TravelItemComponent } from './main/travel-item/travel-item.component';
+import {TravelItemComponent} from './main/travel-item/travel-item.component';
+import {CreateTravelComponent} from './main/create-travel/create-travel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     TravelsComponent,
-    TravelItemComponent
+    TravelItemComponent,
+    CreateTravelComponent
   ],
   imports: [
     BrowserModule,

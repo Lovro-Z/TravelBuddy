@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Travel} from "../../common/dto/travel.dto";
+import {Travel} from "../../core/travel/travel.dto";
 
 @Component({
   selector: 'app-travel-item',

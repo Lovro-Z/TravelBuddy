@@ -6,6 +6,7 @@ import zubcic.travel.travelapplication.mapper.TravelMapper;
 import zubcic.travel.travelapplication.model.Travel;
 import zubcic.travel.travelapplication.repositories.TravelRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,5 +32,13 @@ public class TravelServiceImpl implements TravelService {
                 .stream()
                 .map(travelMapper::entityToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public Travel createTravel(TravelItemDto travelItemDto) {
+        Travel travel = travelMapper.toEntity(travelItemDto);
+        travelRepository.save(travel);
+        return travel;
     }
 }

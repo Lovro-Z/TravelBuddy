@@ -4,15 +4,14 @@ h1 {
   font-size: 45px;
   font-weight: normal;
   margin: 2%;
-  text-align: center;
-  text-shadow: 0 1px 1px #fff;
-  float: left;
-  clear: both;
 }
 
-button {
-  float: right;
-  margin: 20px 10px;
+.title {
+  text-align: left;
+}
+
+.action-btns {
+  text-align: right;
 }
 
 .modal-body {
@@ -29,7 +28,22 @@ button {
 }
 
 .languageButton {
-  margin: 20px 10px;
+  margin: 25px 0;
+}
+
+.login-btn {
+  min-width: 120px;
+  margin-left: 50px;
+}
+.dropdown-btn {
+  margin-left: 50px;
+  margin-right: 20px;
+  min-width: 120px;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
 }
 
 

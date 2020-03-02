@@ -10,5 +10,6 @@ public interface TravelService {
     Travel findTravelById(Long id);
 
     List<TravelItemDto> findAllTravels();
-    
+
+    Travel createTravel(TravelItemDto travelItemDto);
 }

@@ -3,7 +3,10 @@
     "login": "Prijava",
     "logout": "Odjava",
     "username": "Korisničko ime",
-    "password": "Lozinka"
+    "password": "Lozinka",
+    "edit-travels": "Uredi putovanja",
+    "my-travels": "Moja putovanja",
+    "settings": "Postavke"
   },
 
   "register": {

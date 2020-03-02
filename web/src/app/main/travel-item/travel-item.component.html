@@ -1,14 +1,13 @@
 <div class="card clickable">
+  <div class="card-img">
+      <img src="">
+  </div>
   <div class="card-block">
-    <h2 class="card-title">{{ travel.title }}</h2>
-    <p class="card-text">
-      {{ travel.description }}
-    </p>
+    <h2 class="card-title title">{{ travel.title }}</h2>
   </div>
   <ul class="list-group">
-    <li class="list-group-item">Price: {{ travel.price }} KN</li>
-    <li class="list-group-item">Travel Date: {{ travel.date }} </li>
-    <li class="list-group-item">Duration: {{ travel.duration }} days</li>
+    <li class="list-group-item">{{ travel.date | date : 'dd.MM.yyyy.' }}</li>
+    <li class="list-group-item price">{{ travel.price }} KN</li>
   </ul>
 </div>
 

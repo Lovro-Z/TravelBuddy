@@ -3,6 +3,7 @@ package zubcic.travel.travelapplication.services;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,6 @@ import zubcic.travel.travelapplication.repositories.UserRepository;
 import zubcic.travel.travelapplication.security.JwtTokenProvider;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
 
     public String login(String username, String password) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-            return jwtTokenProvider.createToken(username, new ArrayList<Role>());
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            return jwtTokenProvider.createToken(username, (Role) ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getAuthorities().iterator().next());
         } catch (AuthenticationException ex) {
             throw new InvalidUserException("Invalid username/password", HttpStatus.UNPROCESSABLE_ENTITY);
         }
